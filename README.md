@@ -5,8 +5,7 @@
 A dashboard that shows historical PM2.5/AQI trends for Dhaka and **predicts tomorrow's
 air quality** using a trained machine learning model — not just heuristics.
 
-**🔗 Live demo:** _add your Streamlit link here after deploying_
-
+**🔗 Live demo: https://dhakaairquality.streamlit.app
 ## 🖼️ Features
 
 - **Trend explorer** — daily PM2.5 chart, monthly and seasonal averages, filterable by year/season
