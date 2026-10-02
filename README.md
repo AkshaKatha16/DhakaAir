@@ -47,46 +47,6 @@ Two models, trained on two different OpenAQ data sources:
   naive "tomorrow = today" guess. It's included to make the location-specific feature usable,
   but needs 1-2 more seasonal cycles of data before it's reliable
 
-## ⚙️ How It Works
-
-| Step | Technique |
-|------|-----------|
-| Data cleaning | pandas — chronological sort, drop rows with missing lag/rolling features |
-| Feature engineering | lag-1/2/3 PM2.5, 7-day & 30-day rolling means, brick-kiln season flag, weekday/weekend, one-hot neighbourhood |
-| Model selection | Linear Regression vs. Random Forest vs. Gradient Boosting, compared on the same chronological split — best one kept |
-| 7-day forecast | recursive prediction: each day's output becomes the next day's lag feature, rolling means updated in sequence |
-| Serving | models + feature lists pickled with `joblib`, loaded once and cached in Streamlit |
-
-## 🚀 Getting Started
-
-```bash
-git clone https://github.com/<your-username>/dhakaair.git
-cd dhakaair
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-Then open `http://localhost:8501` in your browser.
-
-## 📁 Project Structure
-
-```
-dhakaair/
-├── app.py                    # Main Streamlit dashboard
-├── requirements.txt          # Python dependencies
-├── model_final.pkl           # City-wide model (Linear Regression)
-├── features_final.pkl        # Feature list for the city-wide model
-├── metrics.pkl                # City-wide model evaluation metrics
-├── model_location.pkl        # Neighbourhood-aware model (Random Forest)
-├── location_features.pkl     # Feature list for the neighbourhood model
-├── location_areas.pkl        # List of supported neighbourhoods
-├── location_metrics.pkl      # Neighbourhood model evaluation metrics
-├── model_comparison.pkl      # MAE/R² for Linear Regression / RF / GB / baseline
-├── app_data.csv              # Cleaned city-wide daily data used for charts
-├── area_history.csv          # Per-neighbourhood daily history (for predictions/forecast)
-└── README.md
-```
-
 ## 🔬 Limitations & Roadmap
 
 - The neighbourhood model has under a year of data per station — more seasons of data
